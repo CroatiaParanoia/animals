@@ -27,9 +27,9 @@ export const animalLayoutColor = {
 };
 
 export const animalCardConfig = {
-  allianceCardColor: 'blue',
-  orcCardColor: 'red',
-  unknowCardColor: 'skyblue',
+  Alliance: '#57c4e5',
+  Orc: '#ee6b5c',
+  Unknow: '#e6caa2',
 
   cardSize: 42,
 };

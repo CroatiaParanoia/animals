@@ -8,7 +8,7 @@ const useEventCallback = <T extends (...args: any[]) => any>(fn: T, deps: unknow
   }, [fn, ...deps]);
 
   return useCallback(
-    (...args: Parameters<typeof fn>) => {
+    (...args: Parameters<T>) => {
       const tempFn = ref.current;
       return tempFn(...args);
     },

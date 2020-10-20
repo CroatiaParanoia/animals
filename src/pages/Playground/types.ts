@@ -6,7 +6,7 @@ export interface CardLocationInfo {
 export interface CardAreaInfo extends CardLocationInfo {
   centerOffsetX: number;
   centerOffsetY: number;
-  card?: CardInfo;
+  card: CardInfo | null;
 }
 
 export enum Camp {

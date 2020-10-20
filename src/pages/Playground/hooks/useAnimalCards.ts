@@ -19,14 +19,15 @@ const useAnimalCards = ({ cardAreaInfoArr, cardLayer }: UseAnimalCardsParams) =>
   }, [cardAreaInfoArr]);
 
   useEffect(() => {
+    if (!cardLayer) return () => {};
+
     cardLayer?.activate();
-
+    cardLayer?.removeChildren();
     const pathArr = drawCards();
-
     return () => {
-      pathArr.forEach((item) => item?.remove());
+      pathArr.forEach((v) => v?.remove());
     };
-  }, [cardLayer, cardAreaInfoArr, drawCards]);
+  }, [cardLayer, drawCards]);
 };
 
 export default useAnimalCards;

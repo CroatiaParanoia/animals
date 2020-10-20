@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Man(name) {
+        const arr = [];
+        this.arr = arr;
+        let timer = 0;
+        function wait() {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            let pre = Promise.resolve();
+            arr.forEach((item) => {
+              pre = pre.then((value) => {
+                return item().then(console.log);
+              });
+            });
+          });
+        }
+        this.arr.push(() => {
+          return Promise.resolve(`HI This is ${name}`);
+        });
+        const _sleep = (time) => {
+          return () =>
+            new Promise((resolve) => {
+              setTimeout(() => {
+                resolve(`Wake up after ${time}`);
+              }, time);
+            });
+        };
+        this.sleep = (time) => {
+          this.arr.push(_sleep(time * 1000));
+          wait();
+          return this;
+        };
+
+        const _eat = (param) => {
+          return () => Promise.resolve(`Eat ${param}~`);
+        };
+        this.eat = (param) => {
+          this.arr.push(_eat(param));
+          wait();
+          return this;
+        };
+
+        this.sleepFirst = (time) => {
+          this.arr.unshift(_sleep(time * 1000));
+          wait();
+          return this;
+        };
+
+        wait();
+      }
+
+      function LazyMan(name) {
+        return new Man(name);
+      }
+    </script>
+
+    <script>
+      // 1
+      const getIconUrlByValue = (value) => {
+        for (let i = arr.length - 1; i; i--) {
+          const item = arr[i];
+          if (item.value === value) return item.icon;
+        }
+      };
+
+      // const iconUrl = getIconUrlByValue('[嘻嘻]');
+      const valueArr = ['[哈哈1]', '[哈哈2]', '[哈哈3]', '[哈哈4]'];
+
+      valueArr.map(getIconUrlByValue);
+
+      // 2
+      const createHashMap = (arr) =>
+        arr.reduce(
+          (res, item) => ({
+            ...res,
+            [item.value]: item.icon,
+          }),
+          {},
+        );
+
+      const map = createHashMap([{ icon: 'xxx', value: '[嘻嘻]' }]);
+
+      valueArr.map((key) => map[key]);
+    </script>
+  </body>
+</html>

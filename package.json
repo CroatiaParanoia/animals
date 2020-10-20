@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^5.6.4",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -10,6 +11,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "antd": "^4.6.6",
     "paper": "^0.12.11",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -18,15 +20,17 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint --ext .tsx,.ts src/"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
+    "lint": "eslint --ext .tsx,.ts src/",
+    "check": "npm run lint && npm run build",
+    "publish": "npm run check && node scripts/publish.js"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --pattern='src/*' --staged && npm run lint && npm run build"
+      "pre-commit": "pretty-quick --pattern='src/*' --staged && npm run check"
     }
   },
   "eslintConfig": {},

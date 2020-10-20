@@ -6,7 +6,7 @@ interface UseAnimalToolsParams {
 }
 
 interface UseAnimalToolsReturn {
-  getCardInfoByLocation: (locationInfo: CardLocationInfo) => CardAreaInfo | undefined;
+  getCardInfoByLocation: (locationInfo: CardLocationInfo) => CardAreaInfo;
   computedCardInfoByLocation: (
     locationInfo: CardLocationInfo,
     cardInfo: CardInfo,
@@ -19,7 +19,7 @@ const useAnimalTools = ({ cardAreaInfoArr }: UseAnimalToolsParams): UseAnimalToo
       const { x, y } = locationInfo;
       return cardAreaInfoArr.find((item) => {
         return item.x === x && item.y === y;
-      });
+      })!;
     },
     [cardAreaInfoArr],
   );
